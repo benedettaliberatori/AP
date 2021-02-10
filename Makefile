@@ -27,6 +27,8 @@ clean:
 
 .PHONY: clean
 
+%.o: %.cpp
+		$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 $(EXE): $(OBJ)   
 	$(CXX) $^ -o $(EXE)
