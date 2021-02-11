@@ -1,50 +1,33 @@
 # this is the Makefile
 
 
-EXE = main.x
+
+MAIN = main.x
 CXX = c++
-CXXFLAGS = -I include -g -std=c++14 -Wall -Wextra -I.   # -I. look for including headers 
+CXXFLAGS = -std=c++14 -Iinclude -Wall -Wextra
 
-SRC= main.cpp src/BST.cpp src/iterators.cpp src/helper_functions.cpp
-OBJ=$(SRC:.cpp=.o)
-INC = include/BST.h  include/iterators.h  include/helper_functions.h
-
-VPATH = .   # put headers in this folder
 
 # eliminate default suffixes
 .SUFFIXES:
-SUFFIXES =
+SUFFIXES=
 
 # just consider our own suffixes
-.SUFFIXES: .cpp .o
+.SUFFIXES: .cpp .x
 
-all: $(EXE)
+all: $(MAIN)
 
 .PHONY: all
 
+documentation: Doxygen/doxy.in
+	doxygen $^
+
+$(MAIN): main.cpp 
+	$(CXX) $^ -o $(MAIN) $(CXXFLAGS)
+
 clean:
-	rm -rf $(OBJ) $(EXE) src/*~ include/*~ *~ html latex
+	rm -rf *.x
 
-.PHONY: clean
-
-
-# get binaries
-%.o: %.cpp
-		$(CXX) -c $< -o $@ $(CXXFLAGS)
-
-$(EXE): $(OBJ)   
-	$(CXX) $^ -o $(EXE)
-
-documentation: README.md
-		@cat $^
-
-.PHONY: documentation
-
-main.o: include/BST.h include/helper_functions.h include/iterators.h
-
-src/BST.o: include/BST.h
-src/iterators.o: include/iterators.h
-src/helper_functions.o: include/helper_functions.h 
+.PHONY: clean 
 
 
 
