@@ -1,5 +1,6 @@
 #ifndef BST_TPP
 #define BST_TPP
+#include "BST.hpp"
 
 
 
@@ -98,4 +99,3 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::balanc
 
 
 #endif
-#include "BST.hpp"

@@ -22,7 +22,7 @@ template <typename N>
         explicit _node(const pair_type& p): pair{p} {}
         
 
-        explicit _node(pair_type&& p): pair{}
+        explicit _node(pair_type&& p): pair{std::move(p)} {}
 
       
     

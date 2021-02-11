@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory> // std::unique_ptr
 #include <utility> // std::move
-
+#include <vector>
 #include "node.hpp"
 #include "iterators.hpp"
 
