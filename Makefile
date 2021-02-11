@@ -27,6 +27,8 @@ clean:
 
 .PHONY: clean
 
+
+# get binaries
 %.o: %.cpp
 		$(CXX) -c $< -o $@ $(CXXFLAGS)
 
@@ -34,15 +36,15 @@ $(EXE): $(OBJ)
 	$(CXX) $^ -o $(EXE)
 
 documentation: README.md
+		cat $^
 
 .PHONY: documentation
 
 main.o: include/BST.h include/helper_functions.h include/iterators.h
 
 src/BST.o: include/BST.h
-
 src/iterators.o: include/BST.h include/iterators.h
-src/helper_functions.o: include/BST.h include/helper_functions.h
+src/helper_functions.o: include/BST.h include/helper_functions.h include/iterators.h
 
 
 
