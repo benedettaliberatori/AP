@@ -1,4 +1,4 @@
-#ifndef BST_HPP
+#ifndef BST_HPP_
 #define BST_HPP_
 
 #include <iostream>
