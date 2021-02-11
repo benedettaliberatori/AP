@@ -71,8 +71,14 @@ public:
 
 	v_t& operator[](const k_t& x);
 	v_t& operator[](k_t&& x);
-	//template<typename k_t, typename v_t, typename OP>
-	friend  std::ostream& operator<<(std::ostream& os, const bst& x);
+	
+	//friend
+	template<typename k_t, typename v_t, typename OP>
+	friend std::ostream& operator<<(std::ostream& os, const bst& x){ 
+	    for (const auto &el : x){ os << el.first << " ";}
+	    os << std::endl;
+	    return os;
+	}
 
 };
 

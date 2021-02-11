@@ -93,9 +93,10 @@ template<typename k_t, typename v_t, typename OP> class bst<k_t, v_t, OP>::const
      
 }
 
-template<typename k_t, typename v_t, typename OP> 
-friend  
-std::ostream& class bst<k_t, v_t, OP>::operator<<(std::ostream& os, const bst& x){
+ 
+//friend
+template<typename k_t, typename v_t, typename OP>
+friend std::ostream& operator<<(std::ostream& os, const bst& x){
     
     for (const auto &el : x){
       

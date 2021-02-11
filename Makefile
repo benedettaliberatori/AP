@@ -36,7 +36,7 @@ $(EXE): $(OBJ)
 	$(CXX) $^ -o $(EXE)
 
 documentation: README.md
-		cat $^
+		@cat $^
 
 .PHONY: documentation
 
