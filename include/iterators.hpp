@@ -6,7 +6,7 @@
 #include <utility> //pair
 #include <memory>
 
-#include "node.h"
+#include "node.hpp"
 
 
 template <typename N,typename O> 
@@ -18,8 +18,6 @@ class _iterator {
 public:
 
   using pair_type = O;
-  //using value_type = O;
-  //using pair_type = std::pair<k_t,O>;
   using reference = pair_type &;
   using pointer = pair_type *;
   using difference_type = std::ptrdiff_t;
