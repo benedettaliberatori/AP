@@ -1,4 +1,4 @@
-#include "BST.h"
+#include <BST.h>
 
 // BST.cpp
 // constructors for BST class
@@ -7,7 +7,7 @@
 
 
 
-//template<typename k_t, typename v_t, typename OP> 
+template<typename k_t, typename v_t, typename OP> 
 void bst<k_t, v_t, OP>::copy_rec(const std::unique_ptr<node> &x){	// accessory function for copy ctor
     if(x)
     {
@@ -21,7 +21,7 @@ void bst<k_t, v_t, OP>::copy_rec(const std::unique_ptr<node> &x){	// accessory f
   
   
 // copy ctor
-//template<typename k_t, typename v_t, typename OP> 
+template<typename k_t, typename v_t, typename OP> 
 bst<k_t, v_t, OP>::bst(const bst& x) {			
     
     std::cout << "copy ctor"<< std::endl;
@@ -34,8 +34,8 @@ bst<k_t, v_t, OP>::bst(const bst& x) {
 
 
 // copy assignment
-//template<typename k_t, typename v_t, typename OP> 
-bst& bst<k_t, v_t, OP>::operator=(const bst& x) {	
+template<typename k_t, typename v_t, typename OP> 
+bst<k_t, v_t, OP>& bst<k_t, v_t, OP>::operator=(const bst& x) {	
     std::cout << "copy assignment"<< std::endl;
     root.reset();
     auto tmp = x; // copy ctor
@@ -45,8 +45,8 @@ bst& bst<k_t, v_t, OP>::operator=(const bst& x) {
 
 
 
-//template<typename k_t, typename v_t, typename OP> 
-class bst<k_t, v_t, OP>::iterator bst<k_t, v_t, OP>::begin() noexcept {
+template<typename k_t, typename v_t, typename OP> 
+typename bst<k_t, v_t, OP>::iterator bst<k_t, v_t, OP>::begin() noexcept {
    
     if(!root)
     {
@@ -63,8 +63,8 @@ class bst<k_t, v_t, OP>::iterator bst<k_t, v_t, OP>::begin() noexcept {
 
 
 
-//template<typename k_t, typename v_t, typename OP> 
-class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::begin() const  noexcept {
+template<typename k_t, typename v_t, typename OP> 
+typename bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::begin() const  noexcept {
  
     if(!root)
     {
@@ -80,8 +80,8 @@ class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::begin() const  noexce
 }
 
 
-//template<typename k_t, typename v_t, typename OP> 
-class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::cbegin() const  noexcept {  
+template<typename k_t, typename v_t, typename OP> 
+typename bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::cbegin() const  noexcept {  
    
     if(!root)
     {

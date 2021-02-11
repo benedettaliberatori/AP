@@ -8,7 +8,8 @@
 
 // ++ overloading ---> pre-increment
 template <typename k_t, typename v_t, typename OP> 
-_iterator class bst<k_t, v_t, OP>::&operator++() {
+template<typename O>
+typename _iterator _iterator::&operator++() {
    if (current != nullptr){
      
 	   if (current->right.get() != NULL)

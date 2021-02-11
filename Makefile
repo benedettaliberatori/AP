@@ -43,8 +43,8 @@ documentation: README.md
 main.o: include/BST.h include/helper_functions.h include/iterators.h
 
 src/BST.o: include/BST.h
-src/iterators.o: include/BST.h include/iterators.h
-src/helper_functions.o: include/BST.h include/helper_functions.h include/iterators.h
+src/iterators.o: include/iterators.h
+src/helper_functions.o: include/helper_functions.h 
 
 
 

@@ -72,8 +72,11 @@ public:
 	v_t& operator[](const k_t& x);
 	v_t& operator[](k_t&& x);
 	
+
+	//std::pair<iterator, const bool> my_find(const k_t& x) const;
+
 	//friend
-	template<typename k_t, typename v_t, typename OP>
+	//template<typename k_t, typename v_t, typename OP>
 	friend std::ostream& operator<<(std::ostream& os, const bst& x){ 
 	    for (const auto &el : x){ os << el.first << " ";}
 	    os << std::endl;
