@@ -1,4 +1,11 @@
 # this is the Makefile
+#
+# possible calls: 			make main.x	----> compiles main.cpp into main.x using the headers in include
+#						make dox		----> compiles the docs with doxygen
+#						make			----> compiles everything (.cpp targets and doxy)
+#						make clean	----> cleans it all (both generated executables & doxygen-generated files)
+
+
 
 
 
@@ -14,18 +21,26 @@ SUFFIXES=
 # just consider our own suffixes
 .SUFFIXES: .cpp .x
 
-all: $(MAIN)
+
+
+all: $(MAIN) dox
 
 .PHONY: all
 
-documentation: Doxygen/doxy.in
+
+
+dox: Doxygen/doxy.in
 	doxygen $^
+
+.PHONY: dox	
+
+	
 
 $(MAIN): main.cpp 
 	$(CXX) $^ -o $(MAIN) $(CXXFLAGS)
 
 clean:
-	rm -rf *.x
+	rm -rf *.x html latex
 
 .PHONY: clean 
 
