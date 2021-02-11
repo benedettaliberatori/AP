@@ -5,7 +5,7 @@
 
 
 // my_find
-template<typename k_t, typename v_t, typename OP> 
+//template<typename k_t, typename v_t, typename OP> 
 std::pair<class bst<k_t, v_t, OP>::iterator, const bool> bst<k_t, v_t, OP>::my_find(const k_t& x) const{  // class bst< 
 
 	auto tmp = root.get();
@@ -42,7 +42,7 @@ std::pair<class bst<k_t, v_t, OP>::iterator, const bool> bst<k_t, v_t, OP>::my_f
 
 
 // find
-template<typename k_t, typename v_t, typename OP> 
+//template<typename k_t, typename v_t, typename OP> 
 class bst<k_t, v_t, OP>::iterator bst<k_t, v_t, OP>::find (const k_t& x){
 	auto new_pair = my_find(x);
 	auto iter = new_pair.first;
@@ -59,7 +59,7 @@ class bst<k_t, v_t, OP>::iterator bst<k_t, v_t, OP>::find (const k_t& x){
 
 
 // const find
-template<typename k_t, typename v_t, typename OP> 
+//template<typename k_t, typename v_t, typename OP> 
 class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::find (const k_t& x) const{
 	auto new_pair = my_find(x);
 	auto iter = new_pair.first;
@@ -77,7 +77,7 @@ class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::find (const k_t& x) c
 
 
 
-template<typename k_t, typename v_t, typename OP> template<typename O> 
+//template<typename k_t, typename v_t, typename OP> template<typename O> 
 std::pair<class bst<k_t, v_t, OP>::iterator,bool>  bst<k_t, v_t, OP>:: _insert(O&& x){  // input pair_type
 
       pair_type this_pair = std::forward<O>(x);   // pair to be added
