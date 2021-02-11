@@ -2,88 +2,164 @@
 #include <memory> // std::unique_ptr
 #include <utility> // std::move
 
+#include "node.h"
+#include "iterators.h"
 
-
-template<typename k_t, typename v_t, typename OP=std::less<k_t>>
+template <typename k_t , typename v_t , typename OP = std::less<k_t> >
 class bst{
-
-	using pair_type = std::pair<const k_t, v_t>;
-
-	struct node{
-	std::unique_ptr<node> left;
-	std::unique_ptr<node> right;
-	pair_type pair;
-	node* parent=nullptr;
-
-
-	// custom ctor node starting from pair_type
-	explicit node(const pair_type& p): pair{p} {}; //{std::cout << "l-value\n";}
-	// custom ctor node starting from pair_type
-	explicit node(pair_type&& p) : pair{std::move(p)} {}; //{std::cout << "r-value" << std::endl;}
-
-
-	};
-
-
-	std::unique_ptr<node> root;
-	OP op;
-
-
-
-
+public:
+    using pair_type = std::pair<const k_t,v_t>;
+    using node = _node<pair_type>;
+    using iterator = _iterator<node, pair_type>;
+    using const_iterator = _iterator<node, const pair_type>;
+private:    
+    std::unique_ptr<node> root;
+    
 
 public:
+    bst() = default;
+    ~bst() = default;
+    OP op;
+    //using iterator = _iterator<v_t>>;
+    //using const_iterator = _iterator<const v_t>;
 
+
+    
+
+iterator begin() noexcept {
+  
+    if(!root)
+    {
+      return iterator{nullptr};
+    }
+    node *tmp = root.get();
+    while(tmp->left)
+    {
+        tmp = tmp->left.get();
+    }
+    return iterator{tmp};
+    }
  
-	bst() = default;                      // default ctor
-	~bst() = default;                     // default dctor
+const_iterator begin() const noexcept {
+   
+  
+    if(!root)
+    {
+      return const_iterator{ nullptr};
+    }
+    node *tmp = root.get();
+    while(tmp->left)
+    {
+        tmp = tmp->left.get();
+    }
+    return const_iterator{tmp};
+}
+   
+const_iterator cbegin() const noexcept {
+     
+  
+    if(!root)
+    {
+      return const_iterator{nullptr};
+    }
+    node *tmp = root.get();
+    while(tmp->left)
+    {
+        tmp = tmp->left.get();
+    }
+    return const_iterator{tmp};
+    }
+  
+auto end() noexcept {
+      return iterator{nullptr};
+    }
+auto end() const noexcept {
+      return const_iterator{nullptr};}
+auto cend() const noexcept {  
+      return const_iterator{nullptr};
+    }
 
-	bst(bst &&) = default;                // default move ctor
-	bst &operator=(bst &&) = default;     // default move assignment
-
- 
-	void copy_rec(const std::unique_ptr<node> &x);	// accessory function for copy ctor
-	  
-
-	bst(const bst& x);					// copy ctor 
-
-	bst& operator=(const bst& x);			// copy assignment
 
 
-	
-	
-	template <typename O> class _iterator;
+    bst(bst&&) = default;
+    bst& operator=(bst&&) = default;
+  
+    
+    void copy_rec(const std::unique_ptr<node> &x){
+        if(x)
+        {
+            insert(x->pair);
+            copy_rec(x->left);
+            copy_rec(x->right);
+        }
+    }
 
-	using iterator = _iterator< pair_type>;
-	using const_iterator = _iterator< const pair_type>;
+   bst(const bst& x) {
+    std::cout << "copy ctor"<< std::endl;
+   
+    copy_rec(x.root);
+    
+   }
+
+  
+    bst& operator=(const bst& x) {
+        root.reset();
+        auto tmp = x; // copy ctor
+        *this = std::move(tmp); // move assignment
+        return *this;    
+    }
+ template <typename O> std::pair<iterator,bool>   _insert(O&&x);                                                                                                                                                                                                       
+                                                                                                                                                                                                            
+  std::pair<iterator, bool> insert(const pair_type& x){ return _insert(x);}
+  std::pair<iterator, bool> insert(pair_type&& x){ return _insert(std::move(x));}          
+
+    void erase(const k_t& x);
+    void _erase(iterator& x);
+    void exchange(node* N1, node* N2);
+
+    iterator find (const k_t& x);
+    const_iterator find(const k_t& x) const;
+    int height(std::unique_ptr<node>& x);
+    std::pair<iterator, const bool> my_find(const k_t& x) const;
+    int height(){return height(root);}
+    void printBT(const std::string& prefix, std::unique_ptr<node>& x, bool isLeft)
+{
+    if( x)
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "├──" : "└──" );
+
+        // print the value of the node
+        std::cout << x->pair.first << std::endl;
+
+        // enter the next tree level - left and right branch
+        printBT( prefix + (isLeft ? "│   " : "    "), x->left, true);
+        printBT( prefix + (isLeft ? "│   " : "    "), x->right, false);
+    }
+}
+
+void printBT()
+{
+    printBT("", root, false);    
+}
+
+// pass the root node of your binary tree
+
+friend
+std::ostream &operator<<(std::ostream& os, const bst& x){
 
 
 
-	iterator begin() noexcept;
-	const_iterator begin() const noexcept; 
-	const_iterator cbegin() const noexcept; 
+
+ for (const auto &el : x){
+
+      os << el.first << " " << std::endl;}
 
 
-	iterator end() noexcept {return iterator{nullptr};}
-	const_iterator end() const noexcept {return const_iterator{nullptr};}
-	const_iterator cend() const noexcept {return const_iterator{nullptr};}
+    os << std::endl;
+    return os;
 
-
-	v_t& operator[](const k_t& x);
-	v_t& operator[](k_t&& x);
-	
-
-	//std::pair<iterator, const bool> my_find(const k_t& x) const;
-
-	//friend
-	//template<typename k_t, typename v_t, typename OP>
-	friend std::ostream& operator<<(std::ostream& os, const bst& x){ 
-	    for (const auto &el : x){ os << el.first << " ";}
-	    os << std::endl;
-	    return os;
-	}
+}
 
 };
-
-
-

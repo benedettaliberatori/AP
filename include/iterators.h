@@ -1,23 +1,28 @@
-#include <BST.h>
+
 
 #include <stack>
 #include <iterator>
 #include <utility> //pair
 #include <memory>
 
+#include "node.h"
 
 
-template <typename k_t, typename v_t, typename OP> 
-template <typename O> 
-class bst<k_t, v_t, OP>::_iterator {
-  using node = typename bst<k_t,v_t,OP>::node;
+template <typename N,typename O> 
+class _iterator {
+  template <typename k_t, typename v_t, typename OP> friend class bst;
+  using node = N;
   node* current;
   
 public:
-  OP op;
+
   using pair_type = O;
+  //using value_type = O;
+  //using pair_type = std::pair<k_t,O>;
   using reference = pair_type &;
   using pointer = pair_type *;
+  using difference_type = std::ptrdiff_t;
+  using iterator_category = std::forward_iterator_tag;
 
 
   //constructor
@@ -28,19 +33,45 @@ public:
   pointer operator->() const { return &**this; }
 
   node* getcurrent() {return current;}
-  
   // pre-increment
-  _iterator &operator++();
-  
-  _iterator operator++(int);
+  _iterator &operator++() {
+   if (current != nullptr){
+     
+   if (current->right.get() != NULL)
+   {
+      current = current->right.get();
 
-  friend bool operator==(_iterator &a, _iterator &b) {return a.current == b.current;}
+      while (current->left.get() != NULL){
+      
+      current = current->left.get();}
+       }
+    else{
+        node* tmp = current->parent;
+
+        while(tmp && current != tmp->left.get()){
+            current = tmp;
+            tmp = tmp->parent;
+        }
+
+        current = tmp;
+    
+
+    }
+    }
+
+    return *this;
+    
+  }
+  _iterator operator++(int) {
+  auto tmp{*this};
+  ++(*this);
+  return tmp;
+  }
+
+  friend bool operator==(_iterator &a, _iterator &b) {
+    return a.current == b.current;
+  }
 
   friend bool operator!=(_iterator &a, _iterator &b) { return !(a == b); }
 };
-
-
-
-
-
 
