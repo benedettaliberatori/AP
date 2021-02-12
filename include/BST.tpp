@@ -320,8 +320,8 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::print_
         std::cout << x->pair.first << std::endl;
 
         // enter the next tree level - left and right branch
-        printBT( prefix + (isleft ? "│   " : "    "), x->left, true);
-        printBT( prefix + (isleft ? "│   " : "    "), x->right, false);
+        print_structure( prefix + (isleft ? "│   " : "    "), x->left, true);
+        print_structure( prefix + (isleft ? "│   " : "    "), x->right, false);
     }
 }
 

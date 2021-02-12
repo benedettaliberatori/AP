@@ -79,7 +79,7 @@ int main(){
     //tree.insert(b);
     tree.insert(v);
     std::cout << tree;
-    
+    tree.print_structure();
     /*
     for (int i=0; i<1000; i++) {
     		std::pair<k_type,v_type> bb{i,s};
