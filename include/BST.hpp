@@ -85,7 +85,7 @@ public:
   const_iterator find(const k_t& x) const;
   std::pair<node *, const bool> my_find(const k_t& x) const;
     
-  std::pair<iterator, const bool> my_find(const k_t& x) const;
+  //std::pair<iterator, const bool> my_find(const k_t& x) const;
 
   void print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft);
   void print_structure(){ print_structure("", root, false); return;}
