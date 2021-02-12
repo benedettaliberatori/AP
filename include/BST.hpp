@@ -44,8 +44,8 @@ public:
   
     bst& operator=(const bst& x) {
         root.reset();
-        auto tmp = x; // copy ctor
-        *this = std::move(tmp); // move assignment
+        auto tmp = x; 
+        *this = std::move(tmp); 
         return *this;    
     }
 
@@ -69,24 +69,26 @@ public:
                                                                                 
                                                                                 
                                                                                 
-   bool is_balanced(){return is_balanced(root);}                                
-   int height(){return height(root);}          
+  bool is_balanced(){return is_balanced(root);}                                
+  int height(){return height(root);}          
   
   std::pair<iterator, bool> insert(const pair_type& x){ return _insert(x);}
   std::pair<iterator, bool> insert(pair_type&& x){ return _insert(std::move(x));}          
 
-    void erase(const k_t& x);
-    void _erase(iterator& x);
-    void exchange(node* N1, node* N2);
+  void erase(const k_t& x);
+  void _erase(node* x);
+  void exchange(node* N1, node* N2);
 
   template< class... Types >  std::pair<iterator,bool> emplace(Types&&... args);    
 
-    iterator find (const k_t& x);
-    const_iterator find(const k_t& x) const;
+  iterator find (const k_t& x);
+  const_iterator find(const k_t& x) const;
+  std::pair<node *, const bool> my_find(const k_t& x) const;
     
-    std::pair<iterator, const bool> my_find(const k_t& x) const;
-    
-    
+  std::pair<iterator, const bool> my_find(const k_t& x) const;
+
+  void print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft);
+  void print_structure(){ print_structure("", root, false); return;}
 
 
 
