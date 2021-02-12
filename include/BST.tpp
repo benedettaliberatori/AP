@@ -222,13 +222,13 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::exchan
     if(op(tmp->pair.first,N1->parent->pair.first)){
 
         N1->parent->left.reset(tmp);
-       }
+       
 
     }
     else if(op(N1->parent->pair.first,tmp->pair.first)){
 
         N1->parent->right.reset(tmp);
-        }
+        
 
     }
 
