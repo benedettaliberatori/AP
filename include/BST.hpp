@@ -74,12 +74,14 @@ public:
   
   std::pair<iterator, bool> insert(const pair_type& x){ return _insert(x);}
   std::pair<iterator, bool> insert(pair_type&& x){ return _insert(std::move(x));}          
+  
+  template< class... Types >
+  std::pair<iterator,bool> emplace(Types&&... args){return insert(pair_type(std::forward<Types>(args)...));}
 
   void erase(const k_t& x);
   void _erase(node* x);
   void exchange(node* N1, node* N2);
-
-  template< class... Types >  std::pair<iterator,bool> emplace(Types&&... args);    
+  
 
   iterator find (const k_t& x);
   const_iterator find(const k_t& x) const;
@@ -106,8 +108,10 @@ std::ostream &operator<<(std::ostream& os, const bst& x){
 }
 
 
-v_t& operator[](k_t&& x);
 
+
+
+v_t& operator[](k_t&& x);
 v_t& operator[](const k_t& x);
 
 
