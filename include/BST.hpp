@@ -105,6 +105,15 @@ std::ostream &operator<<(std::ostream& os, const bst& x){
 
 }
 
+
+v_t& operator[](k_t&& x);
+
+v_t& operator[](const k_t& x);
+
+
+
+
+
 };
 
 #endif
