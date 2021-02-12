@@ -22,7 +22,7 @@ int main(){
     std::pair<k_type,v_type> z{5,s};
     std::pair<k_type,v_type> b{18349,s};
     std::pair<k_type,v_type> v{4,s};  // same key==4 not added by insert !
-    
+    tree.insert(k);
   
     srand(1);
     auto start = high_resolution_clock::now();
@@ -43,10 +43,6 @@ int main(){
 
 
 
-
-
-
-
 */
 
 
@@ -61,7 +57,11 @@ int main(){
 
 
 
-/*
+
+
+
+
+
     using k_type = const int;	    // set type of key
     using v_type = std::string;   // set type of value
     
@@ -80,7 +80,7 @@ int main(){
     tree.insert(v);
     std::cout << tree;
     
-    
+    /*
     for (int i=0; i<1000; i++) {
     		std::pair<k_type,v_type> bb{i,s};
     		tree.insert(bb);
@@ -89,8 +89,8 @@ int main(){
     k_type key = 989;
     // measure time of finding a key
     auto start = high_resolution_clock::now();
-    for (int i=0; i<1000; i++) {
-        const int j = rand() % 1000 + 1;
+    for (int i=0; i<100; i++) {
+        const int j = rand() % 100 + 1;
         std::pair<k_type,v_type> bb{j,s};
         tree.insert(bb);
     }
@@ -104,8 +104,7 @@ int main(){
     
     bst<k_type,v_type> t{};   // custom ctor
     bst<k_type,v_type> p{tree};  // copy ctor - deepcopy
-    // std::cout << p;	  // print copied tree
-*/ 
+    std::cout << p;	  // print copied tree
 
-  
+  */
 }

@@ -118,7 +118,7 @@ std::pair<class bst<k_t, v_t, OP>::iterator,bool>  bst<k_t, v_t, OP>:: _insert(O
 	 			new_node->parent = current;
 	 			return (std::pair<iterator,bool>(iterator{new_node}, true));
 	 		}
-	 		else if(op(current->pair.first,this_pair.first)) {   // insert on the right
+	 		else {   // insert on the right
 	 			auto new_node = new node{this_pair};
 	 			current->right.reset(new_node);  // old node points on the right to the new_node
 	 			new_node->parent = current;
@@ -144,7 +144,7 @@ std::pair<class bst<k_t, v_t, OP>::node *, const bool> bst<k_t, v_t, OP>::my_fin
 	while (tmp) {
 	
 		if (!op(my_key,tmp->pair.first) && !(op(tmp->pair.first, my_key))) {  // my_key==current_key
-			std::cout << "same key - key = " << my_key << std::endl;
+			
 			return (std::pair<node*,bool>(tmp, true));
 		}		
 		else if (op(my_key,tmp->pair.first)){  // my_key<current_key
@@ -165,7 +165,6 @@ std::pair<class bst<k_t, v_t, OP>::node *, const bool> bst<k_t, v_t, OP>::my_fin
 			}	
 		}
 	}	
-	std::cout << "root is nullptr - key =" << my_key << std::endl;
 	return (std::pair<node*,bool>(tmp, false)); // iterator to root that is nullptr
 
 }

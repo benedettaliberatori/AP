@@ -97,10 +97,8 @@ public:
 friend
 std::ostream &operator<<(std::ostream& os, const bst& x){
 
- for (const auto &el : x){
-
-      os << el.first << " " << std::endl;}
-
+    for (const auto &el : x){
+    	os << el.first << " " << std::endl;}
 
     os << std::endl;
     return os;
