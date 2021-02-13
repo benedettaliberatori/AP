@@ -9,9 +9,11 @@ Benedetta Liberatori - Ciro Antonio Mami - Davide Roznowicz
 
 The repository contains the following folders:
 
-* `include` : contains the headers: BST.hpp (declaration of the fundamental members of the class BST, together with the constructors and the copy/move semantics as well as declaration of the member functions); BST.tpp (definition of the functions of the class BST); iterators.hpp (implementation of the class iterator); node.hpp (implementation of the class node).
+* `include` : contains the headers: BST.hpp (declaration of the fundamental members of the class BST, together with the constructors and the copy/move semantics as well as declaration of the member functions); BST.tpp (definition of the templated functions for the class BST); iterators.hpp (implementation of the class iterator); node.hpp (implementation of the class node).
 
 * `benchmark.cpp`: contains the code used to perform the benchmarking, whose results are presented in the final part of the report.
+
+* `main.cpp`: main
 
 * `Doxygen`: contains the Doxygen documentation (html and latex)
 
