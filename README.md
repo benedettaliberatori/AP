@@ -1,11 +1,11 @@
-## Binary Search Tree
+# Binary Search Tree
 
 Advanced Programming - 2020/2021
 
 Benedetta Liberatori - Ciro Antonio Mami - Davide Roznowicz
 
 
-# Repo Structure
+## Repo Structure
 
 The repository contains the following:
 
