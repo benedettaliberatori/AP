@@ -37,10 +37,11 @@ public:
   using difference_type = std::ptrdiff_t;
   using iterator_category = std::forward_iterator_tag;
 
-
-	 /**
-	* @brief Constructs a new iterator.
-	*/
+  
+   /**
+  * @brief Constructs a new iterator.
+  * @tparam p ptr to node.
+  */
   explicit _iterator(node *p): current{p} {} 
 
   /**
