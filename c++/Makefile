@@ -1,8 +1,8 @@
 # this is the Makefile
 #
-# possible calls: 			make main.x	----> compiles main.cpp into main.x using the headers in include
-#						make dox		----> compiles the docs with doxygen
-#						make			----> compiles everything (.cpp targets and doxy)
+# possible calls: 				make main.x	----> compiles main.cpp into main.x using the headers in include
+#						make dox	----> compiles the docs with doxygen
+#						make		----> compiles everything (.cpp targets and doxy)
 #						make clean	----> cleans it all (both generated executables & doxygen-generated files)
 
 
