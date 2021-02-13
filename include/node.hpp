@@ -9,9 +9,7 @@
 template <typename N>
    struct _node{
 
-       template <typename k_t, typename v_t, typename OP> friend class bst;
-
-       template <typename I,typename O> friend class _iterator;
+       
   
         std::unique_ptr<_node> left;
         std::unique_ptr<_node> right;

@@ -52,7 +52,7 @@ template<typename k_t, typename v_t, typename OP> class bst<k_t, v_t, OP>::const
                                                                                                                                                                
     }       
 
-template<typename k_t, typename v_t, typename OP> int bst<k_t, v_t, OP>::height(std::unique_ptr<node>& x)                                                      
+template<typename k_t, typename v_t, typename OP> int bst<k_t, v_t, OP>::height(std::unique_ptr<node>& x)  noexcept                                                    
                                                                                                                                                                
 {                                                                                                                                                              
         if (!x) return 0;                                                                                                                                      
@@ -60,7 +60,7 @@ template<typename k_t, typename v_t, typename OP> int bst<k_t, v_t, OP>::height(
 }                                                                                                                                                              
                                                                                                                                                                
                                                                                                                                                                
-template<typename k_t, typename v_t, typename OP> bool bst<k_t, v_t, OP>::is_balanced(std::unique_ptr<node>& x)                                                
+template<typename k_t, typename v_t, typename OP> bool bst<k_t, v_t, OP>::is_balanced(std::unique_ptr<node>& x)  noexcept                                              
 {                                                                                                                                                              
         if (!x)                                                                                                                                                
                 return false;                                                                                                                                  
@@ -72,7 +72,7 @@ template<typename k_t, typename v_t, typename OP> bool bst<k_t, v_t, OP>::is_bal
         return true;                                                                                                                                           
 }
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_balance(std::vector<pair_type>& v, int begin, int end){                             
+template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_balance(std::vector<pair_type>& v, int begin, int end) noexcept {                             
                                                                                                                                                                
                                                                                                                                                                
     if(begin <end){                                                                                                                                            
@@ -88,7 +88,7 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_balan
 }
 
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::balance(){                                                                           
+template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::balance() noexcept {                                                                           
     std::vector<pair_type> v;                                                                                                                                  
      for(const auto &el : *this){                                                                                                                              
     v.push_back(el);                                                                                                                                           
@@ -308,7 +308,7 @@ std::cout << "debug3\n";
 }
 
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft)
+template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft) noexcept
 {
     if( x)
     {

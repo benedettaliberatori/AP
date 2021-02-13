@@ -11,7 +11,7 @@
 
 template <typename N,typename O> 
 class _iterator {
-  template <typename k_t, typename v_t, typename OP> friend class bst;
+  
   using node = N;
   node* current;
   
@@ -28,12 +28,12 @@ public:
 
   explicit _iterator(node *p): current{p} {} 
 
-  reference operator*() const { return current->pair; }
-  pointer operator->() const { return &**this; }
+  reference operator*() const noexcept { return current->pair; }
+  pointer operator->() const noexcept { return &**this; }
 
-  node* getcurrent() {return current;}
+  node* getcurrent() noexcept {return current;}
   // pre-increment
-  _iterator &operator++() {
+  _iterator &operator++()  {
    if (current != nullptr){
      
    if (current->right.get() != NULL)
@@ -67,11 +67,11 @@ public:
   return tmp;
   }
 
-  friend bool operator==(_iterator &a, _iterator &b) {
+  friend bool operator==(_iterator &a, _iterator &b) noexcept {
     return a.current == b.current;
   }
 
-  friend bool operator!=(_iterator &a, _iterator &b) { return !(a == b); }
+  friend bool operator!=(_iterator &a, _iterator &b) noexcept { return !(a == b); }
 
 
 
