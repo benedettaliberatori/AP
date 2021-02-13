@@ -20,3 +20,5 @@ The repository contains the following:
 * `Makefile`: is used to compile the main.cpp (command: make main.x) and generate the Doxygen documentation (command: make dox). By typing make, both the main.x and the documentation are generated.
 
 * `Report.md`: contains a detailed characterization of the classes/structures and most relevant functions. Some final charts illustrate some benchmarking for finding a key, both using our own classes/functions and built-in classes such as maps.
+
+
