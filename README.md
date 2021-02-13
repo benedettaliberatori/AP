@@ -22,6 +22,6 @@ The repository contains the following:
 * `Report.md`: contains a detailed characterization of the classes/structures and most relevant functions. Some final charts illustrate some benchmarking for finding a key, both using our own classes/functions and built-in classes such as maps.
 
 
-# Reverse dicrionary
+# Reverse dictionary
 
-The simple idea to compute the reverse dictionary has been to exploit comprehension, which is a powerful tool to create new list from already existing list, and set which is a container very useful when we want to organize unique datas. In particular we select the new keys of reverse dictionary from the set of the unique values of the original dictionary, and the values instead are taken from the list of the orginal keys selecting only the one which were keys (in the original dictionary) of the value which is now the key.
+The simple idea to compute the reverse dictionary has been to exploit comprehension, which is a powerful tool to create new list from already existing list, and set which is a container very useful when we want to organize data in unique values. In particular we select the new keys of reverse dictionary from the set of the unique values of the original dictionary, and the values instead are taken from the list of the orginal keys selecting only the one which were keys (in the original dictionary) of the value which is now the key.
