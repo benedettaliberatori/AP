@@ -95,18 +95,53 @@ public:
     }
 
 
+  /**
+   * @brief Used to iterate over the binary search tree.
+   * @return Iterator to the leftmost node of the tree. 
+   */
+  iterator begin() noexcept;
 
-  iterator begin() noexcept; 
-  const_iterator begin() const noexcept; 
+  /**
+   * @brief Used to iterate over the binary search tree.
+   * @return Const iterator to the leftmost node of the tree. 
+   */
+  const_iterator begin() const noexcept;
+
+  /**
+   * @brief Used to iterate over the binary search tree.
+   * @return Const iterator to the leftmost node of the tree. 
+   */
   const_iterator cbegin() const noexcept;
   
-  
+  /**
+   * @brief Used to iterate over the binary search tree.
+   * @return Iterator to one-past the last node of the tree. 
+   */
   iterator end() noexcept { return iterator{nullptr};}
+
+  /**
+   * @brief Used to iterate over the binary search tree.
+   * @return Const iterator to one-past the last node of the tree. 
+   */
   const_iterator end() const noexcept { return const_iterator{nullptr};}
+
+  /**
+   * @brief Used to iterate over the binary search tree.
+   * @return Const terator to one-past the last node of the tree. 
+   */
   const_iterator cend() const noexcept {return const_iterator{nullptr};}
-    
-  void clear() noexcept {root.reset(); return;}   
-  void balance() noexcept;                                                               
+
+  /**
+   * @brief Clears the content of the binary search tree.
+   */
+  void clear() noexcept {root.reset(); return;}
+
+
+  /**
+   * @brief Balances the tree.
+   */
+  void balance() noexcept;
+  
   
 
                                        
