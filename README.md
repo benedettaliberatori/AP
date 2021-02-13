@@ -7,7 +7,7 @@ Benedetta Liberatori - Ciro Antonio Mami - Davide Roznowicz
 
 # Repo Structure
 
-The repository contains the following folders:
+The repository contains the following:
 
 * `include` : contains the headers: BST.hpp (declaration of the fundamental members of the class BST, together with the constructors and the copy/move semantics as well as declaration of the member functions); BST.tpp (definition of the templated functions for the class BST); iterators.hpp (implementation of the class iterator); node.hpp (implementation of the class node).
 
