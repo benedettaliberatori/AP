@@ -41,7 +41,7 @@ private:
     * @tparam x<O> Forwarding reference to the type to be inserted, 
     * @return std::pair<iterator,bool> Iterator to the inserted node and true if not already present, iterator to the already present node and false otherwise. 
     */
-    template <typename O> std::pair<iterator,bool>   _insert(O&&x);
+    template <typename O> std::pair<iterator,bool>  _insert(O&&x);
 
     /**
     * @brief Utility function of \p balance(). 
