@@ -42,7 +42,13 @@ public:
   * @brief Constructs a new iterator.
   * @tparam p ptr to node.
   */
-  explicit _iterator(node *p): current{p} {} 
+  explicit _iterator(node *p): current{p} {}
+
+  /**
+    * @brief Deconstructor of the _iterator object.
+    */
+
+    ~_iterator() noexcept = default;
 
   /**
     * @brief overloading operator for dereferencing iterator.

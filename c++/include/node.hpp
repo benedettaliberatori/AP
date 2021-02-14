@@ -42,12 +42,19 @@ template <typename N>
         explicit _node(const pair_type& p): pair{p} {}
         
          /**
-        * @brief move constructor for _node.
+        * @brief Constructor for _node.
         * @tparam p rvalue reference.
         */
         explicit _node(pair_type&& p): pair{std::move(p)} {}
 
-      
+
+
+        /**
+         * @brief Deconstructor.
+         */
+
+         ~_node() noexcept = default;
+  
     
     };
 
