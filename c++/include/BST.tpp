@@ -308,22 +308,6 @@ std::cout << "debug3\n";
 }
 
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft) noexcept
-{
-    if( x)
-    {
-        std::cout << prefix;
-
-        std::cout << (isleft ? "├──" : "└──" );
-
-        // print the value of the node
-        std::cout << x->pair.first << std::endl;
-
-        // enter the next tree level - left and right branch
-        print_structure( prefix + (isleft ? "│   " : "    "), x->left, true);
-        print_structure( prefix + (isleft ? "│   " : "    "), x->right, false);
-    }
-}
 
 
 
