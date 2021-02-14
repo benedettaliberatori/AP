@@ -19,7 +19,7 @@
 
 
 /**
- * @tparam N template standing for an object of class node.
+ * @tparam N template standing for an object of struct node.
  * @tparam O template standing for an object of class pair_type.
  */
 template <typename N,typename O> 
