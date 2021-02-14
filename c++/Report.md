@@ -73,6 +73,20 @@ const_iterator find(const k_t& x) const;
 `find` searches for the key in the tree and two versions of this function are implemented, returning an iterator (or const_iterator) to the proper node if the key is already present; end() iterator (or const_iterator) otherwise.
 
 
+<<<<<<< HEAD
+=======
+#### Subscripting operator []
+```
+//public
+v_t& operator[](k_t&& x);
+v_t& operator[](const k_t& x);
+
+```
+
+the `subscripting operator []` is an overloading operator which, given a key in input (in form of rvalue reference or const lvalue), returns a reference to the associated value if the key was already present in the tree; otherwise, the key is inserted and the associated value is a default one (obtained writing v_t v = {}). 
+
+
+>>>>>>> 1af3793a0f4758de97f4d2e61733a4c8f836a1ed
 #### emplace
 ```
 //public

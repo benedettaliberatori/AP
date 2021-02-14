@@ -67,7 +67,7 @@ private:
     int  height(std::unique_ptr<node>& x) noexcept;
 
      
-    void print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft) noexcept;
+
 
     /**
     * @brief Utility function of \p find() and \p insert(). 
@@ -264,10 +264,6 @@ public:
  
 
  
-  /**
-    * @brief Print the tree together with the connections between nodes, in order to get a sense of the structure.  
-    */
-  void print_structure() noexcept{ print_structure("", root, false); return;}
 
 
   /**

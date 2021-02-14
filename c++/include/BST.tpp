@@ -178,7 +178,6 @@ class bst<k_t, v_t, OP>::iterator bst<k_t, v_t, OP>::find (const k_t& x){
 	auto current = new_pair.first;
 	const bool truth =new_pair.second;
 	if (truth==false){  // key not present
-		std::cout << "NOT found element=" << x << std::endl;
 		return iterator{nullptr};  // iterator to end()
 	}
 	else {
@@ -194,7 +193,6 @@ class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::find (const k_t& x) c
 	auto current = new_pair.first;
 	const bool truth =new_pair.second;
 	if (truth==false){  // key not present
-		std::cout << "NOT found element=" << x << std::endl;
 		return const_iterator{nullptr};  // iterator to end()
 	}
 	else {
@@ -254,9 +252,9 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_erase
 if(height()==1) {root.reset(); return;}
 
   if(!(x->left) && !(x->right)) {
-      if(x->parent->right.get()==x) { std::cout << "debugright\n"; x->parent->right.reset();return;}
+      if(x->parent->right.get()==x) { return;}
          
-      else if(x->parent->left.get()==x) { std::cout << "debugleft\n";x->parent->left.reset();return;}
+      else if(x->parent->left.get()==x) { return;}
 
    
 
@@ -264,15 +262,11 @@ if(height()==1) {root.reset(); return;}
 
     }
   else if (!(x->left) && x->right) {
-std::cout << "debug2\n";
   auto tmp = x->right.get(); 
     
     while(tmp->left) tmp = tmp->left.get();
-    std::cout << "IS THE PROBLEM HERE?" << std::endl;
-
 
     exchange(x,tmp);
-    std::cout << "OR HERE?" << std::endl;
     _erase(tmp);
     
    
@@ -280,7 +274,6 @@ std::cout << "debug2\n";
 
   
   else if (x->left.get() && !(x->right.get())) {
-std::cout << "debug3\n";
     auto tmp = x->left.get();
      while(tmp->right)tmp = tmp->right.get();
 
@@ -292,11 +285,9 @@ std::cout << "debug3\n";
 }
 
   else if(x->left && x->right) {
-      std::cout << "debug1\n";
     auto tmp = x->right.get(); 
     
     while(tmp->left) tmp = tmp->left.get();
-    std::cout << "this is the key" << tmp->pair.first;
 
     exchange(x,tmp);
 
@@ -308,22 +299,6 @@ std::cout << "debug3\n";
 }
 
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::print_structure(const std::string& prefix, std::unique_ptr<node>& x, bool isleft) noexcept
-{
-    if( x)
-    {
-        std::cout << prefix;
-
-        std::cout << (isleft ? "├──" : "└──" );
-
-        // print the value of the node
-        std::cout << x->pair.first << std::endl;
-
-        // enter the next tree level - left and right branch
-        print_structure( prefix + (isleft ? "│   " : "    "), x->left, true);
-        print_structure( prefix + (isleft ? "│   " : "    "), x->right, false);
-    }
-}
 
 
 
