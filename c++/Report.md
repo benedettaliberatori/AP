@@ -79,7 +79,7 @@ v_t& operator[](const k_t& x);
 
 ```
 
-the `subscripting operator []` is an overloading operator which, given a key in input (in form of rvalue reference or const lvalue), returns a reference to the associated value if the key was already present in the tree; otherwise, the key is inserted and the associated value is a default one (obtained writing v_t v {}). 
+the `subscripting operator []` is an overloading operator which, given a key in input (in form of rvalue reference or const lvalue), returns a reference to the associated value if the key was already present in the tree; otherwise, the key is inserted and the associated value is a default one (obtained writing v_t v = {}). 
 
 
 #### emplace
