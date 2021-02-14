@@ -46,8 +46,8 @@ private:
     /**
     * @brief Utility function of \p balance(). 
     * @tparam v Vector of key-value pairs. 
-    * @tparam begin Iterator to the left-most node.
-    * @tparam end Iterator to one-past the last node.
+    * @tparam begin Integer index to the first element.
+    * @tparam end Iteger index to the last element.
     */
     void _balance(std::vector<pair_type>& v, int begin, int end);
 

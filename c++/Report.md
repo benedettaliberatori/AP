@@ -33,10 +33,12 @@ The `_iterator<N, O>` class relies on a constructor which initializes the raw po
 The `bst<k_t, v_t, OP>` class has default constructors and deconstructors, default move semantic and custom copy semantic in order to perform a deep copy of a bst object.
 
 Broadly speaking it has:
-* Functions implemented in the *public* part.
-* Utility functions of the latter, implemented in the *private* part  since do not need to be accessible from outside. 
-* *Operators*.
+* Functions implemented in the **public** part.
+* Utility functions of the latter, implemented in the **private** part  since do not need to be accessible from outside. 
+* **Operators**.
 
+
+The following are used to travers the tree in-order: the functions `begin()`, `end()`, which are overloaded and return an iterator or a const_iterator to the leftmost and one-past the last node respectively, and  `cbegin()` and `cend()` which are the same but return always a const_iterator. 
 
 
 #### my_find
@@ -69,17 +71,6 @@ const_iterator find(const k_t& x) const;
 
 ```
 `find` searches for the key in the tree and two versions of this function are implemented, returning an iterator (or const_iterator) to the proper node if the key is already present; end() iterator (or const_iterator) otherwise.
-
-
-#### Subscripting operator []
-```
-//public
-v_t& operator[](k_t&& x);
-v_t& operator[](const k_t& x);
-
-```
-
-the `subscripting operator []` is an overloading operator which, given a key in input (in form of rvalue reference or const lvalue), returns a reference to the associated value if the key was already present in the tree; otherwise, the key is inserted and the associated value is a default one (obtained writing v_t v {}). 
 
 
 #### emplace
@@ -122,18 +113,64 @@ void erase(const k_t& x);
 The function erase the node which has as key the one passed in input, it call the function my_find to find the ptr to that node, and if that key is present in the tree it pass the ptr to the `_erase` function.
 
 
+#### clear
+```
+//public
+void clear()
+```
+
+Clears the content of the tree by calling the `.reset()` function on the unique pointer `root`.
+
+
+#### balance
+```
+//private
+void _balance(std::vector<pair_type>& v, int begin, int end);
+ 
+//public
+void balance();
+```
+
+A function which balances the tree. After a call to this void function, the absolute difference of heights of left and right subtrees at any node is less than one. It fills an `std::vector<pair_type>` with the pairs stored in the node of the tree, traversing it in-order by means of a range-for-loop. Then calls the function clear() to clear the content of the tree and the utility function _balance. This private function takes as arguments an `std::vector<pair_type>` and two integer indexes to the first and last element of the vector. It inserts a node, in the cleared tree, with the key given by the one in the middle of the vector (or one past the medium one if even) and recursively calls itself on the two subvectors. 
+
+In addition to this we implemented as well a function `is_balanced()`  to check if the bst is balanced and one to compute the height of it `height()`.
+Both uses two utility private functions with the same names that takes as input 
+
+#### Subscripting operator []
+```
+//public
+v_t& operator[](k_t&& x);
+v_t& operator[](const k_t& x);
+
+```
+
+the `subscripting operator []` is an overloading operator which, given a key in input (in form of rvalue reference or const lvalue), returns a reference to the associated value if the key was already present in the tree; otherwise, the key is inserted and the associated value is a default one (obtained writing v_t v {}). 
+
+#### Put-to operator <<
+```
+//public
+friend
+std::ostream& operator<<(std::ostream& os, const bst& x);
+```
+A friend function which prints the tree. It takes in input a const lvalue reference to the tree and a reference to a stream object. The tree is traversed in-order by means of a range-based for loop.
 
 
 
 
 
+## Benchmark
+We have tested the performance of our Binary Search Tree implementation against the one of the `std::map` and `std::unordered_map` containers. Those indeed are associative containers, respectively sorted and not, which store key-value pairs with unique keys. In particular we have compared the `find()` member function among those, considering both with and without balancing the `bst` object.
+
+We have considered different numbers of `N`  key-value pairs to be stored, i.e. ${1,...,9}x{10^2,10^3,...,10^6}$ and inserted pairs with pseudo randomly generated integer keys between 1 and `N`. Being irrelevant for the scope, the values equal the keys types and values. For each value of `N` and each container `B` we have performed a search for all the keys present and took the mean in order to measure the average time for the search. The function return an iterator to the element equivalent to key and this have been used to perform a simple operation (every time a counter is incremented and at the end it is printed) in order to prevent an implicit optimization by the compiler and be sure that the call to find() have been actually performed. The order of the keys to be searched follows an additional randomizations, otherwise using the same order of insertion would have result in compromised timings.
+
+All the measurements have been taken three times in microseconds using `std::crono` and then the results have been averaged among the three runs. We have evaluated the number of runs to be enough since the results obtained show low variance.
+
+The code `benchmark.cpp` used together with all the results in csv format are stored in the `benchmark` directory, here we present a plot.
+As expected the average time of a search in a Binary Search Tree is significantly improved by balancing the tree. The results are more similar to those of the map, which indeed is usually implemented as a Red-and-black tree, which among other properties is a balanced Binary Search Tree and performs the search with logarithmic-time complexity. 
+The unordered_map outperformes the others, since it does not rely on an internal order of the keys but on the hash of those and performs the search with constant-time complexity.
 
 
-
-
-
-
-
+The compiler used is the version 9.3.0 of g++. 
 
 
 
