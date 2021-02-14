@@ -87,10 +87,18 @@ file<<"\n";
 template<class T>
 void testUM(std::ofstream& file, T& B, bool b=false)
 {
+   for(int k=1; k<10; k++){
+  for(int kk=100; kk<N; kk*=10){
+    int j=kk*k;
+    file<<j<<",";
+  }
+   }
+   file<<"\n";
+  for(int time=0; time <3; time++){
   for(int k=1; k<10; k++){
   for(int kk=100; kk<N; kk*=10){
     int j=kk*k;
-  std::vector<float> times(10);
+
   std::vector<int> v(j);
   for(int i=0; i<j; ++i){
    
@@ -99,22 +107,23 @@ void testUM(std::ofstream& file, T& B, bool b=false)
   for(auto x : v){
     B.insert({x,x});
   }
+      if(b==true) B.balance();
 
-      int c=0;
-
+      int c = 0;
       std::random_shuffle(v.begin(), v.end());
-      file<< "measurements on \t"<<j<<"nodes\n";
-      for(int time=0; time <3; time++){
+      
+      
       auto begin =std::chrono::high_resolution_clock::now();
       for (int i=0; i<j; ++i){
  
         if(B.find(v[i])->first==v[i]){ c++;}
  
       }
+      std::cout << c << std::endl;
       auto end = std::chrono::high_resolution_clock::now();
       auto total = std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count();
-      times.push_back(total/(double)j);
-      }
+      auto x = total/(double)j;
+      file << x << ",";
       // double init = 0;
       // double sum = std::accumulate(times.begin(),times.end(), init);
       // double mean= sum*0.1;
@@ -124,17 +133,15 @@ void testUM(std::ofstream& file, T& B, bool b=false)
       
       // file <<j<<"\t Mean:" << mean << "  SD:" << stdev  <<"\t SD2" << stdev2<< "\n";
       //std::cout << j << std::endl;
-      
-      for(auto x : times){
-	file<< x<<",\n";}
+    
       
   }
-  file<<"\n";
+
 }
+file<<"\n";
+  }
   return;
 }
-
-
 
 int main(){
 
