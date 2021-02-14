@@ -19,19 +19,19 @@ int main(){
     std::pair<k_type,v_type> k{8,"monte"};
     std::pair<k_type,v_type> z{9,s};
     std::pair<k_type,v_type> b{10,s};
-    std::pair<k_type,v_type> v{12,s};
+    std::pair<k_type,v_type> g{12,s};
     std::pair<k_type,v_type> f{11,s};
     
     tree.insert(x);
     tree.insert(k);    
     tree.insert(z);
     tree.insert(b);
-    tree.insert(v);
+
     tree.insert(f);
     std::cout << tree;
     tree.balance();
     
-    
+
 
     // measure time of finding a key
     auto start = high_resolution_clock::now();
@@ -47,12 +47,18 @@ int main(){
     tree.balance();
     tree.find(123);
     
-
+    
     bst<k_type,v_type> t{};   // custom ctor
     bst<k_type,v_type> p{tree};  // copy ctor - deepcopy
     std::cout << p;	  // print copied tree
 
 
+    for(auto &el : p){
+
+        tree.erase(el.first);
+    }
+    std::cout << "Tree after erasing\n";
+    std::cout << tree;	
 
 
 

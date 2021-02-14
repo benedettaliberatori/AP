@@ -203,11 +203,11 @@ class bst<k_t, v_t, OP>::const_iterator bst<k_t, v_t, OP>::find (const k_t& x) c
 template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::exchange(node* N1, node* N2){
  auto tmp = new node{N2->pair};
  
-  if(N1->left) {
+  if(N1->left.get()) {
     N1->left->parent = tmp;
     tmp->left.reset(N1->left.release());
     }
-    if(N1->right){
+    if(N1->right.get()){
      N1->right->parent = tmp;
      tmp->right.reset(N1->right.release());
     }
@@ -219,19 +219,19 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::exchan
     if(op(tmp->pair.first,N1->parent->pair.first)){
 
         N1->parent->left.reset(tmp);
-       
+       return;
 
     }
     else if(op(N1->parent->pair.first,tmp->pair.first)){
 
         N1->parent->right.reset(tmp);
-        
+        return;        
 
     }
 
    }
   
-   else { root.reset(tmp);}
+   if(N1->parent == nullptr) { root.reset(tmp);}
       
    
 }
@@ -252,9 +252,9 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_erase
 if(height()==1) {root.reset(); return;}
 
   if(!(x->left) && !(x->right)) {
-      if(x->parent->right.get()==x) { return;}
+      if(x->parent->right.get()==x) {  x->parent->right.reset(); return;}
          
-      else if(x->parent->left.get()==x) { return;}
+      else if(x->parent->left.get()==x) { x->parent->left.reset();return;}
 
    
 
