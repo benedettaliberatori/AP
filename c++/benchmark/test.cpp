@@ -16,15 +16,6 @@
 int N=10000000;
 
 
-double calculateSD(std::vector<float> v, double mean)
-{
-  double sd=0;
-    for(int i = 0; i < 10; ++i)
-      sd += pow(v[i] - mean, 2);
-
-    return sqrt(sd /(v.size()-1));
-}
-
 template<class T>
 void test(std::ofstream& file, T& B, bool b=false)
 {
@@ -65,16 +56,8 @@ void test(std::ofstream& file, T& B, bool b=false)
       auto total = std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count();
       auto x = total/(double)j;
       file << x << ",";
-      // double init = 0;
-      // double sum = std::accumulate(times.begin(),times.end(), init);
-      // double mean= sum*0.1;
-      // double sq_sum = std::inner_product(times.begin(), times.end(), times.begin(), 0.0);
-      // double stdev = std::sqrt(sq_sum / times.size() - mean * mean);
-      // double stdev2=calculateSD(times, mean);    
       
-      // file <<j<<"\t Mean:" << mean << "  SD:" << stdev  <<"\t SD2" << stdev2<< "\n";
-      //std::cout << j << std::endl;
-    
+         
       
   }
 
@@ -124,16 +107,7 @@ void test2(std::ofstream& file, T& B, bool b=false)
       auto total = std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count();
       auto x = total/(double)j;
       file << x << ",";
-      // double init = 0;
-      // double sum = std::accumulate(times.begin(),times.end(), init);
-      // double mean= sum*0.1;
-      // double sq_sum = std::inner_product(times.begin(), times.end(), times.begin(), 0.0);
-      // double stdev = std::sqrt(sq_sum / times.size() - mean * mean);
-      // double stdev2=calculateSD(times, mean);    
       
-      // file <<j<<"\t Mean:" << mean << "  SD:" << stdev  <<"\t SD2" << stdev2<< "\n";
-      //std::cout << j << std::endl;
-    
       
   }
 
@@ -180,22 +154,6 @@ int main(){
   myfile4 << "Writing this to a file.\n";
   test(myfile4, BST, true);
   myfile4.close();
-
-
-  
-
-  
-  
-
-  
-
-  
-  
-  
- 
-
-
-
 
 
 }

@@ -52,7 +52,7 @@ template<typename k_t, typename v_t, typename OP> class bst<k_t, v_t, OP>::const
                                                                                                                                                                
     }       
 
-template<typename k_t, typename v_t, typename OP> int bst<k_t, v_t, OP>::height(std::unique_ptr<node>& x)  noexcept                                                    
+template<typename k_t, typename v_t, typename OP> int bst<k_t, v_t, OP>::height(const std::unique_ptr<node>& x)  noexcept                                                    
                                                                                                                                                                
 {                                                                                                                                                              
         if (!x) return 0;                                                                                                                                      
@@ -60,7 +60,7 @@ template<typename k_t, typename v_t, typename OP> int bst<k_t, v_t, OP>::height(
 }                                                                                                                                                              
                                                                                                                                                                
                                                                                                                                                                
-template<typename k_t, typename v_t, typename OP> bool bst<k_t, v_t, OP>::is_balanced(std::unique_ptr<node>& x)  noexcept                                              
+template<typename k_t, typename v_t, typename OP> bool bst<k_t, v_t, OP>::is_balanced(const std::unique_ptr<node>& x)  noexcept                                              
 {                                                                                                                                                              
         if (!x)                                                                                                                                                
                 return false;                                                                                                                                  

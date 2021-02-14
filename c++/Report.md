@@ -1,7 +1,8 @@
-## Binary Search Tree
+## Introduction
 
 The purpose of this project is the implementation of a templated binary search tree using modern C++14.
-The performance of the container has been compared against the one of other built-in containers in the Standard Template Library. 
+The performance of the container has been compared against the one of other built-in containers in the Standard Template Library.
+The code has been documented using Doxygen. 
 
 
 ## General Structure
@@ -101,24 +102,23 @@ The function is used to support the erase function, basically it takes two raw p
 //private
 void _erase(node* x);
 
-```
-`_erase` is the heart of the erasing of a node, the function is recursive and take as input a ptr to the node to be erased, the case zero is the one in which the node to be erased has no child, in this case, we simply delete it by the resetting of the left/right ptr of his parent. The other cases are the ones in which the node to be deleted has only left child, only right child, or both child: in the first case we exchange the node to be erased with the node which has the biggest key smaller than the one to be erased, in the two other cases we exchange with the smallest key which is bigger than the one to be erased. The last control is if the height of the tree of the node to be erased is 1 one (so we are deleting the last node of the tree), where we simly reset the root, deleting the tree.
-
-
-#### erase
-```
 //public
 void erase(const k_t& x);
 
 ```
+`_erase` is the heart of the erasing of a node, the function is recursive and take as input a ptr to the node to be erased, the case zero is the one in which the node to be erased has no child, in this case, we simply delete it by the resetting of the left/right ptr of his parent. The other cases are the ones in which the node to be deleted has only left child, only right child, or both child: in the first case we exchange the node to be erased with the node which has the biggest key smaller than the one to be erased, in the two other cases we exchange with the smallest key which is bigger than the one to be erased. The last control is if the height of the tree of the node to be erased is 1 one (so we are deleting the last node of the tree), where we simly reset the root, deleting the tree. Then `erase` delete the node which has as key the one passed in input, it call the function `my_find` to find the ptr to that node, and if that key is present in the tree it pass the ptr to the `_erase` function.
 
-The function erase the node which has as key the one passed in input, it call the function my_find to find the ptr to that node, and if that key is present in the tree it pass the ptr to the `_erase` function.
-
+#### copy_rec
+```
+//public
+void copy_rec(const std::unique_ptr<node> &x){
+```
+Utility function used by the copy constructor to perform a deep copy. It takes a const lvalue reference to a unique pointer to the root of a tree to be copied. It inserts a node in the current bst, with the key-value pair of the root node of the tree to be copied, and recursively calls itself on the left and right subtrees.  
 
 #### clear
 ```
 //public
-void clear()
+void clear();
 ```
 
 Clears the content of the tree by calling the `.reset()` function on the unique pointer `root`.
@@ -167,7 +167,7 @@ We have considered different numbers of `N`  key-value pairs to be stored, i.e. 
 
 All the measurements have been taken three times in microseconds using `std::crono` and then the results have been averaged among the three runs. We have evaluated the number of runs to be enough since the results obtained show low variance.
 
-The code `benchmark.cpp` used together with all the results in csv format are stored in the `benchmark` directory, here we present a plot.
+The code `test.cpp` used together with all the results in csv format are stored in the `benchmark` directory, here we present a plot.
 As expected the average time of a search in a Binary Search Tree is significantly improved by balancing the tree. The results are more similar to those of the map, which indeed is usually implemented as a Red-and-black tree, which among other properties is a balanced Binary Search Tree and performs the search with logarithmic-time complexity. 
 The unordered_map outperformes the others, since it does not rely on an internal order of the keys but on the hash of those and performs the search with constant-time complexity.
 

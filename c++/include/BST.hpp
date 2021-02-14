@@ -57,14 +57,14 @@ private:
     * @tparam x Unique pointer to the root of the tree to be checked.  
     * @return Boolean, true if balanced, false otherwise.
     */
-    bool is_balanced (std::unique_ptr<node>& x) noexcept;
+    bool is_balanced (const std::unique_ptr<node>& x) noexcept;
 
     /**
     * @brief Utility function of \p height(). 
     * @tparam x Unique pointer to the root of the tree to be checked.   
     * @return Integer for the height of the tree. 
     */
-    int  height(std::unique_ptr<node>& x) noexcept;
+    int  height(const std::unique_ptr<node>& x) noexcept;
 
      
 
