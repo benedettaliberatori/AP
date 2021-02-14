@@ -85,7 +85,7 @@ file<<"\n";
 }
 
 template<class T>
-void testUM(std::ofstream& file, T& B, bool b=false)
+void test2(std::ofstream& file, T& B, bool b=false)
 {
    for(int k=1; k<10; k++){
   for(int kk=100; kk<N; kk*=10){
@@ -107,7 +107,7 @@ void testUM(std::ofstream& file, T& B, bool b=false)
   for(auto x : v){
     B.insert({x,x});
   }
-      if(b==true) B.balance();
+
 
       int c = 0;
       std::random_shuffle(v.begin(), v.end());
@@ -155,13 +155,13 @@ int main(){
   std::ofstream myfile;
   myfile.open("fileBST.csv");
   myfile << "Writing this to a file.\n";
-  test(myfile, BST);
+  test2(myfile, BST);
   myfile.close();  
   
   std::ofstream myfile2;
   myfile2.open("fileM.csv");
   myfile2 << "Writing this to a file.\n";
-  test(myfile2, BST);
+  test2(myfile2, M);
   myfile2.close();  
   
   
@@ -169,7 +169,7 @@ int main(){
   std::ofstream myfile3;
   myfile3.open("fileUM.csv");
   myfile3 << "Writing this to a file.\n";
-  testUM(myfile3, UM,false);
+  test2(myfile3, UM);
   myfile3.close();
 
 
