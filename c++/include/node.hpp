@@ -45,7 +45,7 @@ template <typename N>
         * @brief Constructor for _node.
         * @tparam p rvalue reference.
         */
-        explicit _node(pair_type&& p): pair{std::move(p)} {}
+        explicit _node(pair_type&& p) noexcept: pair{std::move(p)} {}
 
 
 

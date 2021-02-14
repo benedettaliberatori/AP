@@ -72,7 +72,7 @@ template<typename k_t, typename v_t, typename OP> bool bst<k_t, v_t, OP>::is_bal
         return true;                                                                                                                                           
 }
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_balance(std::vector<pair_type>& v, int begin, int end) noexcept {                             
+template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_balance(std::vector<pair_type>& v, int begin, int end) {                             
                                                                                                                                                                
                                                                                                                                                                
     if(begin <end){                                                                                                                                            
@@ -88,7 +88,7 @@ template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::_balan
 }
 
 
-template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::balance() noexcept {                                                                           
+template<typename k_t, typename v_t, typename OP> void bst<k_t, v_t, OP>::balance() {                                                                           
     std::vector<pair_type> v;                                                                                                                                  
      for(const auto &el : *this){                                                                                                                              
     v.push_back(el);                                                                                                                                           

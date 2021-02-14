@@ -49,7 +49,7 @@ private:
     * @tparam begin Iterator to the left-most node.
     * @tparam end Iterator to one-past the last node.
     */
-    void _balance(std::vector<pair_type>& v, int begin, int end) noexcept;
+    void _balance(std::vector<pair_type>& v, int begin, int end);
 
 
     /**
@@ -198,7 +198,7 @@ public:
   /**
    * @brief Balances the tree.
    */
-  void balance() noexcept;
+  void balance();
   
                                                                        
                                                                                 
