@@ -30,22 +30,21 @@ template <typename N>
         /** @brief ptr to the parent node. */
         _node* parent = nullptr;
         
-        using pair_type = N;
-        
+                
         /** @brief pair_type member. */
-        pair_type pair;
+        N pair;
 
          /**
         * @brief Constructs a new _node.
         * @tparam p const lvalue.
         */
-        explicit _node(const pair_type& p): pair{p} {}
+        explicit _node(const N& p): pair{p} {}
         
          /**
         * @brief Constructor for _node.
         * @tparam p rvalue reference.
         */
-        explicit _node(pair_type&& p) noexcept: pair{std::move(p)} {}
+        explicit _node(N&& p) noexcept: pair{std::move(p)} {}
 
 
 

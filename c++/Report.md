@@ -171,7 +171,13 @@ The code `test.cpp` used together with all the results in csv format are stored 
 As expected the average time of a search in a Binary Search Tree is significantly improved by balancing the tree. The results are more similar to those of the map, which indeed is usually implemented as a Red-and-black tree, which among other properties is a balanced Binary Search Tree and performs the search with logarithmic-time complexity. 
 The unordered_map outperformes the others, since it does not rely on an internal order of the keys but on the hash of those and performs the search with constant-time complexity.
 
+
 ![](benchmark/benchmark.png)
+
+Then we have copiled the codes with -O3 optimizations and rerun the same benchmark, obtaining the results shown in the following picture. The overall timings are significantly smaller with respect to the previus ones and this time the balanced bst performed the search faster than the std::map. We can then conclude that our implementation makes it somehow easier for the compiler to optimize the find function and results in better timings. 
+![](benchmark/benchmarkopt.png)
+
+
 
 The compiler used is the version 9.3.0 of g++. 
 
