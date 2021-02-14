@@ -136,7 +136,7 @@ void balance();
 A function which balances the tree. After a call to this void function, the absolute difference of heights of left and right subtrees at any node is less than one. It fills an `std::vector<pair_type>` with the pairs stored in the node of the tree, traversing it in-order by means of a range-for-loop. Then calls the function clear() to clear the content of the tree and the utility function _balance. This private function takes as arguments an `std::vector<pair_type>` and two integer indexes to the first and last element of the vector. It inserts a node, in the cleared tree, with the key given by the one in the middle of the vector (or one past the medium one if even) and recursively calls itself on the two subvectors. 
 
 In addition to this we implemented as well a function `is_balanced()`  to check if the bst is balanced and one to compute the height of it `height()`.
-Both uses two utility private functions with the same names that takes as input 
+Both uses two utility private functions with the same names that takes as input a pointer to the root of a tree and are recursively called to the left and right subtrees. 
 
 #### Subscripting operator []
 ```
@@ -171,6 +171,7 @@ The code `benchmark.cpp` used together with all the results in csv format are st
 As expected the average time of a search in a Binary Search Tree is significantly improved by balancing the tree. The results are more similar to those of the map, which indeed is usually implemented as a Red-and-black tree, which among other properties is a balanced Binary Search Tree and performs the search with logarithmic-time complexity. 
 The unordered_map outperformes the others, since it does not rely on an internal order of the keys but on the hash of those and performs the search with constant-time complexity.
 
+![](benchmark/benchmark.png)
 
 The compiler used is the version 9.3.0 of g++. 
 
