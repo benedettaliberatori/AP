@@ -94,8 +94,32 @@ std::pair<iterator,bool> emplace(Types&&... args)
 
 
 
+#### exchange
+```
+//private
+void exchange(node* N1, node* N2)
+
+```
+
+The function is used to support the erase function, basically it takes two raw ptr to node which have to be exchanged, the most simple way to do this that came to us has been to create a new node with the samep pair of N2 (the node to be copied) and then exchanging it with N1, exchanging parent and left and right node. The usage of smart pointers allow us to be sure that everything will be done with no memory leaks.
+
+#### _erase
+```
+//private
+void _erase(node* x);
+
+```
+`_erase` is the heart of the erasing of a node, the function is recursive and take as input a ptr to the node to be erased, the case zero is the one in which the node to be erased has no child, in this case, we simply delete it by the resetting of the left/right ptr of his parent. The other cases are the ones in which the node to be deleted has only left child, only right child, or both child: in the first case we exchange the node to be erased with the node which has the biggest key smaller than the one to be erased, in the two other cases we exchange with the smallest key which is bigger than the one to be erased. The last control is if the height of the tree of the node to be erased is 1 one (so we are deleting the last node of the tree), where we simly reset the root, deleting the tree.
 
 
+#### erase
+```
+//public
+void erase(const k_t& x);
+
+```
+
+The function erase the node which has as key the one passed in input, it call the function my_find to find the ptr to that node, and if that key is present in the tree it pass the ptr to the `_erase` function.
 
 
 
