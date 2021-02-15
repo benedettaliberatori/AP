@@ -39,7 +39,7 @@ Broadly speaking it has:
 * **Operators**.
 
 
-The following are used to travers the tree in-order: the functions `begin()`, `end()`, which are overloaded and return an iterator or a const_iterator to the leftmost and one-past the last node respectively, and  `cbegin()` and `cend()` which are the same but return always a const_iterator. 
+The following are used to traverse the tree in-order: the functions `begin()`, `end()`, which are overloaded and return an iterator or a const_iterator to the leftmost and one-past the last node respectively, and  `cbegin()` and `cend()` which are the same but return always a const_iterator. 
 
 
 #### my_find
@@ -95,7 +95,7 @@ void exchange(node* N1, node* N2)
 
 ```
 
-The function is used to support the erase function, basically it takes two raw ptr to node which have to be exchanged, the most simple way to do this that came to us has been to create a new node with the samep pair of N2 (the node to be copied) and then exchanging it with N1, exchanging parent and left and right node. The usage of smart pointers allow us to be sure that everything will be done with no memory leaks.
+The function is used to support the erase function: basically, it takes two raw ptr to node which have to be exchanged; the simplest way to do this is to create a new node with the same pair of N2 (the node to be copied) and then exchanging it with N1, exchanging parent and left and right node. The usage of smart pointers allows us to be sure that everything will be done with no memory leaks.
 
 #### _erase
 ```
@@ -106,7 +106,7 @@ void _erase(node* x);
 void erase(const k_t& x);
 
 ```
-`_erase` is the heart of the erasing of a node, the function is recursive and take as input a ptr to the node to be erased, the case zero is the one in which the node to be erased has no child, in this case, we simply delete it by the resetting of the left/right ptr of his parent. The other cases are the ones in which the node to be deleted has only left child, only right child, or both child: in the first case we exchange the node to be erased with the node which has the biggest key smaller than the one to be erased, in the two other cases we exchange with the smallest key which is bigger than the one to be erased. The last control is if the height of the tree of the node to be erased is 1 one (so we are deleting the last node of the tree), where we simly reset the root, deleting the tree. Then `erase` delete the node which has as key the one passed in input, it call the function `my_find` to find the ptr to that node, and if that key is present in the tree it pass the ptr to the `_erase` function.
+`_erase` is at the heart of the erasing of a node: the function is recursive and takes as input a ptr to the node to be erased. The case zero is the one in which the node to be erased has no child: in this case, we simply delete it by resetting the left/right ptr of its parent. The other cases are the ones in which the node to be deleted only has a left child or only a right child, or both children: in the first case, we exchange the node to be erased with the node which has the biggest key smaller than the one to be erased; in the two other cases we exchange it with the smallest key which is bigger than the one to be erased. The last thing to be checked is if the height of the tree of the node to be erased is 1 (so we are deleting the last node of the tree), where we simply reset the root, deleting the tree. Then `erase` deletes the node which has, as the key, the one passed in input; then, it calls the function `my_find` to find the ptr to that node, and if that key is present in the tree it passes the ptr to the `_erase` function.
 
 
 
@@ -156,28 +156,32 @@ A friend function which prints the tree. It takes in input a const lvalue refere
 
 
 ## Benchmark
-We have tested the performance of our Binary Search Tree implementation against the one of the `std::map` and `std::unordered_map` containers. Those indeed are associative containers, respectively sorted and not, which store key-value pairs with unique keys. In particular we have compared the `find()` member function among those, considering both with and without balancing the `bst` object.
+We have tested the performance of our Binary Search Tree implementation against the one of the `std::map` and `std::unordered_map` containers. Those, indeed, are associative containers, respectively sorted and not, which store key-value pairs with unique keys. In particular we have compared the `find()` member function among those, considering both with and without balancing the `bst` object.
 
+<<<<<<< HEAD
+We have considered different numbers of `N`  key-value pairs to be stored, i.e. ${1,...,9}x{10^2,10^3,...,10^6}$ and inserted pairs with pseudo randomly generated integer keys between 1 and `N`. Being irrelevant for the scope, a specific key has the same type of the associated value (moreover, if key=1, then value=1; if key=3, than value=3). For each value of `N` and each container `B` we have performed a search for all the keys present and took the mean in order to measure the average time for the search. The function returns an iterator to the element equivalent to the key and this has been used to perform a simple operation (every time a counter is incremented and it is printed in the end) in order to prevent an implicit optimization by the compiler and in oreder to be sure that the calls to find() have actually been performed. The order of the keys to be searched follows an additional randomization: otherwise, if the same order of insertion had been used, it would have resulted in compromised timings.
+=======
 We have considered different numbers of `N`  key-value pairs to be stored, i.e. {1,...,9}x{10^2,10^3,...,10^6} and inserted pairs with pseudo randomly generated integer keys between 1 and `N`. Being irrelevant for the scope, the values equal the keys types and values. For each value of `N` and each container `B` we have performed a search for all the keys present and took the mean in order to measure the average time for the search. The function return an iterator to the element equivalent to key and this have been used to perform a simple operation (every time a counter is incremented and at the end it is printed) in order to prevent an implicit optimization by the compiler and be sure that the call to find() have been actually performed. The order of the keys to be searched follows an additional randomizations, otherwise using the same order of insertion would have result in compromised timings.
+>>>>>>> f475acfeb663bfe79f720ae71c58b7f0906beeaa
 
 All the measurements have been taken three times in microseconds using `std::chrono` and then the results have been averaged among the three runs. We have evaluated the number of runs to be enough since the results obtained show low variance.
 
 The code `test.cpp` used together with all the results in csv format are stored in the `benchmark` directory, here we present a plot.
 As expected the average time of a search in a Binary Search Tree is significantly improved by balancing the tree. The results are more similar to those of the map, which indeed is usually implemented as a Red-and-black tree, which among other properties is a balanced Binary Search Tree and performs the search with logarithmic-time complexity. 
-The unordered_map outperformes the others, since it does not rely on an internal order of the keys but on the hash of those and performs the search with constant-time complexity.
+The unordered_map outperforms remarkably better than the others, since it does not rely on an internal order of the keys but on theirs hash; thus, it performs the search with constant-time complexity.
 
 
 ![](benchmark/benchmark.png)
 
 
-Then we have copiled the codes with -O3 optimizations and rerun the same benchmark, obtaining the results shown in the following picture. The overall timings are significantly smaller with respect to the previus ones and this time the balanced bst performed the search faster than the std::map. We can then conclude that our implementation makes it somehow easier for the compiler to optimize the find function and results in better timings. 
+Then we have compiled the codes with -O3 optimization and re-run the same benchmark, obtaining the results shown in the following picture. The overall timings are significantly smaller with respect to the previous ones and, this time, the balanced bst performed the search faster than the std::map. We can then conclude that our implementation makes it somehow easier for the compiler to optimize the find function and results in better timings.
 
 
 ![](benchmark/benchmarkopt.png)
 
 
 
-The compiler used is the version 9.3.0 of g++. 
+The compiler used is g++ with version 9.3.0. 
 
 
 
