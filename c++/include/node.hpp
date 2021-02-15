@@ -47,8 +47,8 @@ template <typename N>
         explicit _node(N&& p) noexcept: pair{std::move(p)} {}
 
         /**
-        * @brief Copy constructor for _node, called by the copy constructor of bst. 
-        * It copies the pair, set the parent with the given raw pointer and recursively calls itself on the left and right children if present.
+        * @brief Constructor for _node, called by the copy constructor of bst. 
+        * It copies the pair from the given node, set the parent with the given raw pointer and recursively calls itself on the left and right children if present.
         * @tparam x Unique_ptr to node to be copied. 
         * @tparam p Raw ptr to the parent of the node to be constructed. 
         */

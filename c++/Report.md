@@ -22,7 +22,7 @@ The class `_iterator` provides a way to sequentially access the elements of our 
 ## Constructors & Member Functions
 
 
-The `_node<N>` struct relies on a default decontructor and two constructors, one which takes a const lvalue reference to N and one which takes a rvalue reference to N. Both constructs the new node with the pair given and set parent, left and right to `nullptr`. We provided the struct also with a copy constructor, which is then called by the copy constructor of the bst class. This constructor takes as input a unique pointer to the node to be copied and a raw pointer to set the parent of the node to be constructed, copies the pair and recursively calls itself on the children of the node, if present in the node to be copied.
+The `_node<N>` struct relies on a default decontructor and three constructors: the first and the second take a const lvalue reference and a rvalue reference to N, constructing the new node with the pair given and set parent, left and right to `nullptr`. The third one takes as input a unique pointer to the node to be copied and a raw pointer to set the parent of the node to be constructed, copies the pair and recursively calls itself on the children of the node, if present in the node to be copied. This constructor is then called by the copy constructor of the bst class in order to perform a deep copy. 
 
 The `_iterator<N, O>` class relies on a constructor which initializes the raw pointer to the current node with the given one and a default deconstructor. Furthermore it has:
 * `dereference operator*()` which returns a reference to the pair stored in the current node.
