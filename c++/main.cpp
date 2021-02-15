@@ -14,6 +14,7 @@ int main(){
     using v_type = std::string;   // set type of value
     
     bst<k_type,v_type> tree{};
+    
     std::string s = "ciao";
     std::pair<k_type,v_type> x{100,s};
     std::pair<k_type,v_type> k{8,"monte"};
@@ -29,6 +30,12 @@ int main(){
 
     tree.insert(f);
     std::cout << tree;
+
+    std::cout << "Test of deep copy\n";
+    bst<k_type,v_type> tree4{tree};
+    std::cout << tree4 << "\n Height is \t" << tree4.height()<< std::endl;
+    std::cout << tree << "\n Height is \t" << tree.height()<< std::endl;
+    
     tree.balance();
     
     std::cout << "Test of emplace\n";
@@ -36,13 +43,13 @@ int main(){
     int u=6;
     tree.emplace(u,s);
     std::cout << tree;
-
+    std::cout <<"Copy after insertion\n" << tree4 << std::endl;
     std::cout << "Test of []\n";
-    std::cout << tree[10];
+    std::cout << tree[10]<< std::endl;
     tree[10]="changed";
-    std::cout << tree[10];
+    std::cout << tree[10] << std::endl;
     tree[10]=s;
-    std::cout << tree[10];
+    std::cout << tree[10] << std::endl;
     
     
 

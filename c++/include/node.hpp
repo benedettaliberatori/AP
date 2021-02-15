@@ -35,7 +35,7 @@ template <typename N>
         N pair;
 
          /**
-        * @brief Constructs a new _node.
+        * @brief Constructor for  _node.
         * @tparam p const lvalue.
         */
         explicit _node(const N& p): pair{p} {}
@@ -46,7 +46,16 @@ template <typename N>
         */
         explicit _node(N&& p) noexcept: pair{std::move(p)} {}
 
-
+        /**
+        * @brief Copy constructor for _node, called by the copy constructor of bst. 
+        * It copies the pair, set the parent with the given raw pointer and recursively calls itself on the left and right children if present.
+        * @tparam x Unique_ptr to node to be copied. 
+        * @tparam p Raw ptr to the parent of the node to be constructed. 
+        */
+        _node(const std::unique_ptr<_node> &x, _node* p) :  parent{p}, pair{x->pair} {
+	  if(x->left){left.reset(new _node{x->left, this});}
+	  if(x->right){ right.reset(new _node{x->right, this});}
+	  }
 
         /**
          * @brief Deconstructor.

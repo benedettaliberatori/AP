@@ -10,7 +10,7 @@ The code has been documented using Doxygen.
 
 Three classes are implemented:
 
-* `bst<k_t, v_t, OP>`: a templated Binary Search Tree; `k_t` is the key type - `v_t` is the value type - OP corresponds to std::less<k_t>, an object which implements a templated comparison operation among the keys. The class features two members: `root` (a `std::unique_ptr` pointing to the root node of the tree) and `op`, an OP object.
+* `bst<k_t, v_t, OP>`: a templated Binary Search Tree; `k_t` is the key type - `v_t` is the value type - OP, which by default corresponds to std::less<k_t>, an object which implements a templated comparison operation among the keys. The class features two members: `root` (a `std::unique_ptr` pointing to the root node of the tree) and `op`, an OP object.
 
 * `_node<N>`: a struct templated on `N`, the type of the pair stored in the node (in our case std::pair<const k_t, v_t>). The members are and three pointers: `left` and `right` (`std::unique_ptr` to left and right children nodes respectively), and `parent` (raw pointer pointing to the parent node), and the `pair` stored. 
 
@@ -22,11 +22,11 @@ The class `_iterator` provides a way to sequentially access the elements of our 
 ## Constructors & Member Functions
 
 
-The `_node<N>` struct relies on a default decontructor and two constructors, one which takes a const lvalue reference to N and one which takes a rvalue reference to N. Both constructs the new node with the pair given and set parent, left and right to `nullptr`. 
+The `_node<N>` struct relies on a default decontructor and two constructors, one which takes a const lvalue reference to N and one which takes a rvalue reference to N. Both constructs the new node with the pair given and set parent, left and right to `nullptr`. We provided the struct also with a copy constructor, which is then called by the copy constructor of the bst class. This constructor takes as input a unique pointer to the node to be copied and a raw pointer to set the parent of the node to be constructed, copies the pair and recursively calls itself on the children of the node, if present in the node to be copied.
 
 The `_iterator<N, O>` class relies on a constructor which initializes the raw pointer to the current node with the given one and a default deconstructor. Furthermore it has:
 * `dereference operator*()` which returns a reference to the pair stored in the current node.
-* `reference operator->()`.
+* `reference operator->()` which returns the pointer to the pair stored in the current node. 
 *  function `getcurrent()` which returns  a  raw pointer to the current node, making it possible to access this private member.
 * `pre-increment &operator++()`  and `post-increment operator++(int)` which allows to traverse the tree in-order.
 * boolean `operator==` and `operator!=` for comparisons.
@@ -108,12 +108,7 @@ void erase(const k_t& x);
 ```
 `_erase` is the heart of the erasing of a node, the function is recursive and take as input a ptr to the node to be erased, the case zero is the one in which the node to be erased has no child, in this case, we simply delete it by the resetting of the left/right ptr of his parent. The other cases are the ones in which the node to be deleted has only left child, only right child, or both child: in the first case we exchange the node to be erased with the node which has the biggest key smaller than the one to be erased, in the two other cases we exchange with the smallest key which is bigger than the one to be erased. The last control is if the height of the tree of the node to be erased is 1 one (so we are deleting the last node of the tree), where we simly reset the root, deleting the tree. Then `erase` delete the node which has as key the one passed in input, it call the function `my_find` to find the ptr to that node, and if that key is present in the tree it pass the ptr to the `_erase` function.
 
-#### copy_rec
-```
-//public
-void copy_rec(const std::unique_ptr<node> &x){
-```
-Utility function used by the copy constructor to perform a deep copy. It takes a const lvalue reference to a unique pointer to the root of a tree to be copied. It inserts a node in the current bst, with the key-value pair of the root node of the tree to be copied, and recursively calls itself on the left and right subtrees.  
+
 
 #### clear
 ```
@@ -174,7 +169,10 @@ The unordered_map outperformes the others, since it does not rely on an internal
 
 ![](benchmark/benchmark.png)
 
+
 Then we have copiled the codes with -O3 optimizations and rerun the same benchmark, obtaining the results shown in the following picture. The overall timings are significantly smaller with respect to the previus ones and this time the balanced bst performed the search faster than the std::map. We can then conclude that our implementation makes it somehow easier for the compiler to optimize the find function and results in better timings. 
+
+
 ![](benchmark/benchmarkopt.png)
 
 

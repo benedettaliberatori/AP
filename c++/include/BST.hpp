@@ -120,25 +120,16 @@ public:
     */
     bst& operator=(bst&&) noexcept = default;
   
-    /**
-    * @brief Utility function of the copy constuctor. 
-    * @tparam x Unique pointer to the root of the tree to be copied.  
-    */
-    void copy_rec(const std::unique_ptr<node> &x){
-        if(x)
-        {
-            insert(x->pair);
-            copy_rec(x->left);
-            copy_rec(x->right);
-        }
-    }
-
+    
 
    /**
-    * @brief Copy constructor. Performes a deep copy of a bst tree.
-    * @tparam b const lvalue reference to the tree to be copied.
+    * @brief Copy constructor. Performes a deep copy of a bst tree calling the constructor of the node which takes as input a unique_ptr to the node to be copied and a raw ptr to the parent.
+    * @tparam x const lvalue reference to the tree to be copied.
     */
-   bst(const bst& x) {copy_rec(x.root);}
+   bst(const bst& x) {
+     if (x.root) root.reset(new node{x.root, nullptr});
+     
+   }
 
     /**
     * @brief Copy assignment.
