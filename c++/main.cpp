@@ -31,7 +31,20 @@ int main(){
     std::cout << tree;
     tree.balance();
     
+    std::cout << "Test of emplace\n";
+    tree.emplace(5,s);
+    int u=6;
+    tree.emplace(u,s);
+    std::cout << tree;
 
+    std::cout << "Test of []\n";
+    std::cout << tree[10];
+    tree[10]="changed";
+    std::cout << tree[10];
+    tree[10]=s;
+    std::cout << tree[10];
+    
+    
 
     // measure time of finding a key
     auto start = high_resolution_clock::now();
@@ -51,7 +64,7 @@ int main(){
     bst<k_type,v_type> t{};   // custom ctor
     bst<k_type,v_type> p{tree};  // copy ctor - deepcopy
     std::cout << p;	  // print copied tree
-
+    
 
     for(auto &el : p){
 
@@ -60,6 +73,7 @@ int main(){
     std::cout << "Tree after erasing\n";
     std::cout << tree;	
 
+   
 
 
 /*
