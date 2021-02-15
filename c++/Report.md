@@ -22,7 +22,7 @@ The class `_iterator` provides a way to sequentially access the elements of our 
 ## Constructors & Member Functions
 
 
-The `_node<N>` struct relies on a default decontructor and three constructors: the first and the second take a const lvalue reference and a rvalue reference to N, constructing the new node with the pair given and set parent, left and right to `nullptr`. The third one takes as input a unique pointer to the node to be copied and a raw pointer to set the parent of the node to be constructed, copies the pair and recursively calls itself on the children of the node, if present in the node to be copied. This constructor is then called by the copy constructor of the bst class in order to perform a deep copy. 
+The `_node<N>` struct relies on a default decontructor and three constructors: the first and the second take a const lvalue reference and a rvalue reference to N, constructing the new node with the pair given and set parent, left and right to `nullptr`. The third one takes as input a unique pointer to the node to be copied and a raw pointer to set the parent of the node to be constructed, copies the pair and recursively calls itself on the children, if present in the node to be copied. This constructor is then called by the copy constructor of the bst class in order to perform a deep copy. 
 
 The `_iterator<N, O>` class relies on a constructor which initializes the raw pointer to the current node with the given one and a default deconstructor. Furthermore it has:
 * `dereference operator*()` which returns a reference to the pair stored in the current node.
@@ -97,7 +97,7 @@ void exchange(node* N1, node* N2)
 
 The function is used to support the erase function: basically, it takes two raw ptr to node which have to be exchanged; the simplest way to do this is to create a new node with the same pair of N2 (the node to be copied) and then exchanging it with N1, exchanging parent and left and right node. The usage of smart pointers allows us to be sure that everything will be done with no memory leaks.
 
-#### _erase
+#### erase
 ```
 //private
 void _erase(node* x);
