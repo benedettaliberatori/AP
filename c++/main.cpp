@@ -38,11 +38,11 @@ int main(){
     std::cout << tree;
 
     std::cout << "Test of []\n";
-    std::cout << tree[10];
+    std::cout << tree[10] << std::endl;
     tree[10]="changed";
-    std::cout << tree[10];
+    std::cout << tree[10]<< std::endl;
     tree[10]=s;
-    std::cout << tree[10];
+    std::cout << tree[10]<< std::endl;
     
     
 
