@@ -45,19 +45,19 @@ int main(){
     std::cout << tree;
     std::cout <<"Copy after insertion\n" << tree4 << std::endl;
     std::cout << "Test of []\n";
-<<<<<<< HEAD
+
     std::cout << tree[10]<< std::endl;
     tree[10]="changed";
     std::cout << tree[10] << std::endl;
     tree[10]=s;
     std::cout << tree[10] << std::endl;
-=======
+
     std::cout << tree[10] << std::endl;
     tree[10]="changed";
     std::cout << tree[10]<< std::endl;
     tree[10]=s;
     std::cout << tree[10]<< std::endl;
->>>>>>> e0826eae48f520ab6219ed7716188a30defa06de
+
     
     
 
